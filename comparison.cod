@@ -1,0 +1,62 @@
+
+/******************** C ********************/
+typedef struct {int a; int b;} SomeStruct;
+typedef enum {
+   SOME_A = 0, SOME_B, SOME_C
+} SomeEnum;
+
+SomeStruct somestruct_new(int a, int b) {
+    return (SomeStruct){a, b};
+}
+
+void somestruct_do_stuff(SomeStruct* ptr) {
+    ptr->a += ptr->b;
+}
+
+/******************** Cod ********************/
+struct SomeStruct {
+    i32 a, b;
+}
+enum SomeEnum {
+    A = 0, B, C
+}
+
+for SomeStruct {
+    const Self new(i32 a, i32 b) {
+        return Self {a, b};
+    }
+    void do_stuff(*self) {
+        self.a += self.b;
+    }
+}
+/******************** Extra ********************/
+// 'Const' vs 'let'
+
+let i32 a = 10;
+//a += 1; // ERROR! Cannot reassign immutable 'let' variable.
+
+const i32 a = 10;
+//a += 1; // ERROR! Cannot modify constant 'a'.
+
+// Difference:
+// >>> let: Equivalent of C's const.
+// >>> const: Equivalent of C++'s constexpr.
+
+// Similar to C++ constexpr functions.
+const i32 add(i32 a, i32 b) {
+    return a + b;
+}
+
+// Executed at compile time!
+const i32 a = 1;
+const i32 b = 2;
+const i32 res = add(a, b);
+
+// Generics:
+const T add(T a, T b) for T: Numerical {
+    return a + b;
+}
+
+const U cast(T val) for T, U {
+    return (U)val;
+}
